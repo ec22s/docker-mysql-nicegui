@@ -58,7 +58,7 @@
 
 - http://localhost:8888 で下記のように表示される
 
-  <img width=256 height=256 src="後で" />
+  <img width=256 height=256 src="https://github.com/user-attachments/assets/1356d971-f3dd-4bac-a853-73c144819f65" />
 
 - `nicegui/main.py` を編集すると `NiceGUI` がホットリロードする（開発で便利）
 

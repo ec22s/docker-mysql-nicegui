@@ -1,0 +1,43 @@
+services:
+  service-mysql:
+    image: image-mysql
+    build:
+      context: ./mysql
+    container_name: container-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 3s
+      timeout: 3s
+      retries: 3
+
+  service-nicegui:
+    image: image-nicegui
+    # restart: always
+    build:
+      context: ./nicegui
+    container_name: container-nicegui
+    depends_on:
+      service-mysql:
+        condition: service_healthy
+    ports:
+      - 8888:8080
+    working_dir: "/app"
+    volumes:
+      - ./nicegui:/app
+    links:
+      - service-mysql
+    command: python /app/main.py
+
+volumes:
+  mysql:

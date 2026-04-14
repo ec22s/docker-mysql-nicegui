@@ -1,8 +1,6 @@
 services:
   service-mysql:
-    image: image-mysql
-    build:
-      context: ./mysql
+    image: mysql:8.0
     container_name: container-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -13,8 +11,8 @@ services:
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - mysql:/var/lib/mysql
-    ports:
-      - 3306:3306
+    # ports:
+    #   - 3306:3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
       interval: 3s
@@ -35,8 +33,6 @@ services:
     working_dir: "/app"
     volumes:
       - ./nicegui:/app
-    links:
-      - service-mysql
     command: python /app/main.py
 
 volumes:

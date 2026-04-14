@@ -1,13 +1,13 @@
 .PHONY: $(shell egrep -o ^[a-zA-Z_-]+: $(MAKEFILE_LIST) | sed 's/://')
 
 clean:
-	@docker-compose down --rmi all --volumes --remove-orphans
+	@docker-compose down --volumes && make prune
 
 down:
-	@docker compose down -v
+	@docker compose down && make prune
 
 dev:
-	@docker compose up -d --build
+	@docker compose up -d --build && make prune
 
-phony:
-	@echo $(shell egrep -o ^[a-zA-Z_-]+: $(MAKEFILE_LIST) | sed 's/://')
+prune:
+	@docker image prune -f

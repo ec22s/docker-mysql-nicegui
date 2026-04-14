@@ -38,15 +38,15 @@
 
 <br>
 
-### 動作確認環境（2026年2月）
+### 動作確認環境（2026年4月）
 
-- macos Tahoe 26.3
+- macos Tahoe 26.4
 
-- GNU bash, version 5.3.3(1)-release (x86_64-apple-darwin23.6.0)
+- GNU bash, version 5.3.9(1)-release (x86_64-apple-darwin23.6.0)
 
-- Docker version 29.0.0, build 3d4129b9ea
+- Docker version 29.4.0, build 9d7ad9ff18
 
-- Docker Compose version 2.40.3
+- Docker Compose version 5.1.0
 
 - GNU Make 3.81
 
@@ -62,9 +62,9 @@
 
 - `nicegui/main.py` を編集すると `NiceGUI` がホットリロードする（開発で便利）
 
-`make down` コンテナ終了（MySQLのボリュームを削除しDBデータを消す）
+`make down` コンテナ終了（DBボリュームは維持）
 
-`make clean` コンテナを終了し、コンテナとイメージ全て消去
+`make clean` コンテナを終了し、コンテナとイメージとボリューム全て消去
 
 <br>
 
@@ -77,8 +77,6 @@
   - `Tortoise ORM` + `SQLite` の例が公式リポジトリにあり、MySQLでも試す
 
     → https://github.com/zauberzeug/nicegui/blob/main/examples/sqlite_database/main.py
-
-  - Webコンテンツが増えたら適当なサイトにデプロイ
 
 <br>
 
